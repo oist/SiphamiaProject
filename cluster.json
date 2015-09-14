@@ -1,0 +1,36 @@
+{
+    "__default__" :
+    {
+        "n" : 1,
+        "partition" : "compute",
+        "mem-per-cpu" : "8G",
+        "time" : "7-00:00:00",
+	"nodes": 1,
+	"cpus-per-task": 1
+    },
+    "kmergenie" :
+    {
+        "n" : 10,
+        "mem-per-cpu": "4G"
+    },
+    "abyss" :
+    {
+        "time" : "21-00:00:00",
+	"partition": "largemem",
+	"n": 10,
+        "mem-per-cpu": "40G"
+    },
+    "platanus" :
+    {
+        "time" : "21-00:00:00",
+	"partition": "largemem",
+	"n": 12,
+        "mem-per-cpu": "40G"
+    },
+    "lighter" :
+    {
+	"n": 10,
+        "mem-per-cpu": "1G"
+    }
+
+}
