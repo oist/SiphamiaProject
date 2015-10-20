@@ -1,10 +1,10 @@
 # SiphamiaProject
-RNA-seq Differential Expression project with Siphamia tubifer and Photobacterium mandapamensis
+RNA-seq Differential Expression project with Siphamia tubifer and _Photobacterium mandapamensis_
 
 # Workflow
 ## Bacteria
 1. Add Spike-in sequences to P. mandapamensis genome
-2. Create reference genome index with RSEM (rsem_ref.slurm)
+2. Create reference genome index with RSEM (```rsem_ref.slurm```)
 3. Trim barcodes from sample files with Flexbar (trim_bact.slurm, trim_lo.slurm)
 4. Calculate differential expression with RSEM (bactRSEM.slurm, loRSEM.slurm)
 5. Analyse differential expression with edgeR (bacteria.genes.R)
