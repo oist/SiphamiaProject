@@ -1,20 +1,25 @@
-# 
-import subprocess
+# Workflow for RNA-seq analysis of Paul's bacteria (Photobacterium leiognathi subsp. mandapamensis) 
+
 '''
 # Software requirements
-bowtie2/2.2.3
+pyfasta
 '''
 
-RAWREADS = ["Pmucro1_S1_L001", "Pmucro1_S1_L002", "Pmucro3_S1_L001", "Pmucro3_S1_L002"]
-KMERS = 96
-BASEDIR = "/work/MikheyevU/sasha/mucrosquamatus-genome/src/"
+BASEDIR = "/work/MikheyevU/sasha/paul-rnaseq"
+BACTERIA = ['Bacteria_29a_S23', 'Bacteria_29a_S23']
 
 rule all:
-	input: "../ref/GCF_000211495.1_ASM21149v1.1.bt2"
+	input: expand(BASEDIR + "/data/trinity/blast/FPKMfiltered_Trinity.{n}.xml", n = map(lambda x: str(x).zfill(4), range(0,1000)))
 
-#build bowtie2 index
-rule bowtie2_build:
-     input: "../ref/GCF_000211495.1_ASM21149v1_genomic.fna"
-     output: "../ref/GCF_000211495.1_ASM21149v1.1.bt2"
-     shell: "module load bowtie2/2.2.3 ; bowtie2-build {input} ../ref/GCF_000211495.1_ASM21149v1"
+#split trinity into 1000 chunks
+rule splitTrinity:
+	input: BASEDIR + "/data/trinity/FPKMfiltered_Trinity.fasta"
+	output: temp(expand(BASEDIR + "/data/trinity/FPKMfiltered_Trinity.{n}.fasta", n = map(lambda x: str(x).zfill(4), range(0,1000))))
+	params: outdir = BASEDIR + "/data/trinity/blast"
+	shell: "pyfasta split -n 1000 {input}; mkdir -p {params.outdir}"
 
+rule blastTrinity:
+	input: BASEDIR + "/data/trinity/FPKMfiltered_Trinity.{n}.fasta"
+	output: BASEDIR + "/data/trinity/blast/FPKMfiltered_Trinity.{n}.xml"
+	params: outfile = BASEDIR + "/data/trinity/blast/FPKMfiltered_Trinity.{n}.xml"
+	shell: "module load ncbi-blast/2.2.30+; blastx -num_threads 8 -query {input} -db /work/MikheyevU/ncbi/nr -evalue 1e-4 -max_target_seqs 1 -outfmt 5 -out {params.outfile}"
