@@ -15,7 +15,7 @@ RNA-seq Differential Expression project with _Siphamia tubifer_ and _Photobacter
 1. Create bowtie2 reference index for _P. mandapamensis_ genome
 2. Align mixed fish and bacteria (Light Organ) samples to bacteria genome with bowtie2 (``align.slurm``)
 4. Create file of unaligned sequences using samtools - these are the fish LO sequences  
-  * ``sambam.slurm`` - convert ``.sam`` file from ``align.slurm`` to a ``.bam``
+  * ``sambam.slurm`` - convert ``.sam`` file from ``align.slurm`` to a ``.bam`` file
   * ``bamsort.slurm`` - sort the ``.bam`` file
   * ``unmapped.slurm`` - remove unmapped reads 
 5. Convert LO files to fastq files with bedtools (``sort_unmapped.slurm``, ``bamtofast.slurm``)
