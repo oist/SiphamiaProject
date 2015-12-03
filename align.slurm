@@ -13,7 +13,7 @@
 #SBATCH --array 2-5
 . $HOME/.bashrc
 
-DATA=/home/m/maggi-brisbin/SiphComp/
+DATA=/work/MikheyevU/sasha/paul-rnaseq/Maggi/data
 
 bowtie2 -t -x $DATA/siphgenome/indexgen/siphgenome -1 $DATA/trimmed/LO${SLURM_ARRAY_TASK_ID}_trim__1.fastq \
 -2 $DATA/trimmed/LO${SLURM_ARRAY_TASK_ID}_trim__2.fastq -S $DATA/aligned/LO${SLURM_ARRAY_TASK_ID}.sam
