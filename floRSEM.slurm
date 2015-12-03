@@ -14,7 +14,7 @@
 #SBATCH --array 2-5
 . $HOME/.bashrc
 
-DATA=/home/m/maggi-brisbin/SiphComp/fishfiles
+DATA=/work/MikheyevU/sasha/paul-rnaseq/Maggi/data/fishfiles
 
 rsem-calculate-expression --bowtie2 --bowtie2-sensitivity-level very_sensitive --seed-length 19 --num-threads 12 \
 --paired-end $DATA/LO${SLURM_ARRAY_TASK_ID}.end1.fastq $DATA/LO${SLURM_ARRAY_TASK_ID}.end2.fastq \

@@ -14,7 +14,7 @@
 #SBATCH --array 2-5
 . $HOME/.bashrc
 
-DATA=/home/m/maggi-brisbin/SiphComp
+DATA=/work/MikheyevU/sasha/paul-rnaseq/Maggi/data
 
 bedtools bamtofastq -i $DATA/aligned/LO${SLURM_ARRAY_TASK_ID}.qsort.bam \
 -fq $DATA/fishfiles/LO${SLURM_ARRAY_TASK_ID}.end1.fastq \

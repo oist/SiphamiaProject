@@ -13,6 +13,6 @@
 #SBATCH --array 2-5
 . $HOME/.bashrc
 
-DATA=/home/m/maggi-brisbin/SiphComp/aligned
+DATA=/work/MikheyevU/sasha/paul-rnaseq/Maggi/data/aligned
 
 samtools sort $DATA/LO${SLURM_ARRAY_TASK_ID}.bam $DATA/LO${SLURM_ARRAY_TASK_ID}_sorted

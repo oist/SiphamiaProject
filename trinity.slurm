@@ -13,8 +13,8 @@
 #SBATCH --error=trinity_%j.err
 . $HOME/.bashrc
 
-LDATA=/home/m/maggi-brisbin/SiphComp/fishfiles
-MDATA=/home/m/maggi-brisbin/SiphComp/trimmed
+LDATA=/work/MikheyevU/sasha/paul-rnaseq/Maggi/data/fishfiles
+MDATA=/work/MikheyevU/sasha/paul-rnaseq/Maggi/data/trimmed
 
 Trinity --seqType fq --max_memory 64G  \
      --left $LDATA/LO2.end1.fastq,$LDATA/LO3.end1.fastq,$LDATA/LO4.end1.fastq,$LDATA/LO5.end1.fastq,$MDATA/M2_trim__1.fastq,$MDATA/M3_trim__1.fastq,$MDATA/M4_trim__1.fastq,$MDATA/M5_trim__1.fastq \

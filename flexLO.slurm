@@ -14,7 +14,7 @@
 #SBATCH --array 2-5
 . $HOME/.bashrc
 
-DATA=/home/m/maggi-brisbin/SiphComp/reads
+DATA=/work/MikheyevU/sasha/paul-rnaseq/Maggi/data/reads
 
 flexbar -t $HOME/SiphComp/trimmed/LO${SLURM_ARRAY_TASK_ID}_trim_ -r $DATA/LO${SLURM_ARRAY_TASK_ID}_1.fastq \
 -p $DATA/LO${SLURM_ARRAY_TASK_ID}_2.fastq -f fastq -a $HOME/SiphComp/adapterfiles/LO${SLURM_ARRAY_TASK_ID}adapters.fasta -ao 1

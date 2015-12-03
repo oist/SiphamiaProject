@@ -12,5 +12,7 @@
 #SBATCH --error=rsemref_%j.err
 . $HOME/.bashrc
 
-rsem-prepare-reference --bowtie2 /home/m/maggi-brisbin/SiphComp/siphgenome/spike/refwspike.fa \
-/home/m/maggi-brisbin/SiphComp/siphgenome/bt2ref/out/resem_bt2spike_ref
+DATA= /work/MikheyevU/sasha/paul-rnaseq/Maggi/data
+
+rsem-prepare-reference --bowtie2 $DATA/siphgenome/spike/refwspike.fa \
+$DATA/siphgenome/bt2ref/out/resem_bt2spike_ref

@@ -14,7 +14,8 @@
 
 . $HOME/.bashrc
 
-DATA=/home/m/maggi-brisbin/SiphComp/fishfiles/trinity_out_dir
-REF=/home/m/maggi-brisbin/SiphComp/fishfiles/ref_transcript
+
+DATA=/work/MikheyevU/sasha/paul-rnaseq/Maggi/data/fishfiles/trinity_out_dir
+REF=/work/MikheyevU/sasha/paul-rnaseq/Maggi/data/fishfiles/ref_transcript
 
 extract-transcript-to-gene-map-from-trinity $DATA/Trinity.fasta $REF/ref_transcript_

@@ -14,7 +14,7 @@
 #SBATCH --array 2-5
 . $HOME/.bashrc
 
-DATA=/home/m/maggi-brisbin/SiphComp/trimmed
+DATA=/work/MikheyevU/sasha/paul-rnaseq/Maggi/data/trimmed
 
 rsem-calculate-expression --bowtie2 --bowtie2-sensitivity-level very_sensitive --seed-length 19 --num-threads 12 \
 --paired-end $DATA/M${SLURM_ARRAY_TASK_ID}_trim__1.fastq $DATA/M${SLURM_ARRAY_TASK_ID}_trim__2.fastq \

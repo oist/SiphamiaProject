@@ -15,7 +15,7 @@
 . $HOME/.bashrc
 
 
-DATA=/home/m/maggi-brisbin/SiphComp
+DATA=/work/MikheyevU/sasha/paul-rnaseq/Maggi/data
 
 rsem-calculate-expression --bowtie2 --bowtie2-sensitivity-level very_sensitive --seed-length 19 --num-threads 12 \
 --paired-end $DATA/trimmed/B${SLURM_ARRAY_TASK_ID}_trim__1.fastq $DATA/trimmed/B${SLURM_ARRAY_TASK_ID}_trim__2.fastq \

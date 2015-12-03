@@ -13,7 +13,7 @@
 #SBATCH --error=ref_trans_%j.err
 . $HOME/.bashrc
 
-DATA=/home/m/maggi-brisbin/SiphComp/fishfiles
+DATA=/work/MikheyevU/sasha/paul-rnaseq/Maggi/data/fishfiles
     
 . $HOME/trinityrnaseq-2.1.0/util/align_and_estimate_abundance.pl --transcripts $DATA/trinity_out_dir/Trinity.fasta --est_method RSEM --aln_method bowtie --trinity_mode --prep_reference --output_prefix $DATA/ref_transcript/ref_transcript
 
