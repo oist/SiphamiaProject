@@ -1,210 +1,24 @@
 # load data for bacteria DE
-`B29.genes` <- read.delim("/home/m/maggi-brisbin/SiphComp/RSEM/B29.genes.results")
-`B30.genes` <- read.delim("/home/m/maggi-brisbin/SiphComp/RSEM/B30.genes.results")
-`B31.genes` <- read.delim("/home/m/maggi-brisbin/SiphComp/RSEM/B31.genes.results")
-`B32.genes` <- read.delim("/home/m/maggi-brisbin/SiphComp/RSEM/B32.genes.results")
-`LO2.genes` <- read.delim("/home/m/maggi-brisbin/SiphComp/RSEM/LO2.genes.results")
-`LO3.genes` <- read.delim("/home/m/maggi-brisbin/SiphComp/RSEM/LO3.genes.results")
-`LO4.genes` <- read.delim("/home/m/maggi-brisbin/SiphComp/RSEM/LO4.genes.results")
-`LO5.genes` <- read.delim("/home/m/maggi-brisbin/SiphComp/RSEM/LO5.genes.results")
+`B29.genes` <- read.delim("~/Desktop/Siphamia/siph.genes.results/bacteria/B29.genes.results")
+`B30.genes` <- read.delim("~/Desktop/Siphamia/siph.genes.results/bacteria/B30.genes.results")
+`B31.genes` <- read.delim("~/Desktop/Siphamia/siph.genes.results/bacteria/B31.genes.results")
+`B32.genes` <- read.delim("~/Desktop/Siphamia/siph.genes.results/bacteria/B32.genes.results")
+`LO2.genes` <- read.delim("~/Desktop/Siphamia/siph.genes.results/bacteria/LO2.genes.results")
+`LO3.genes` <- read.delim("~/Desktop/Siphamia/siph.genes.results/bacteria/LO3.genes.results")
+`LO4.genes` <- read.delim("~/Desktop/Siphamia/siph.genes.results/bacteria/LO4.genes.results")
+`LO5.genes` <- read.delim("~/Desktop/Siphamia/siph.genes.results/bacteria/LO5.genes.results")
 
 #make data frames
 Genes<- data.frame(B29.genes$gene_id,B29.genes$expected_count,B30.genes$expected_count, B31.genes$expected_count,B32.genes$expected_count, LO2.genes$expected_count,LO3.genes$expected_count, LO4.genes$expected_count,LO5.genes$expected_count,LO5.genes$expected_count)
 FPKM<- data.frame(B29.genes$gene_id,B29.genes$FPKM,B30.genes$FPKM,B31.genes$FPKM, B32.genes$FPKM, LO2.genes$FPKM, LO3.genes$FPKM,LO4.genes$FPKM,  LO5.genes$FPKM )
-ercc_conc<-cms_095046 <- read.delim("~/Desktop/Siphamia/siph.genes.results/cms_095046.txt", stringsAsFactors=FALSE)
-ercc_conc<-ercc_conc[,2:7]
-ercc_conc<-ercc_conc[order(ercc_conc$ERCC.ID),]
-ERCC<-FPKM[1:92,]
 
+#add column names
 names(Genes)<-c("gene_id","B29","B30","B31", "B32","LO2","LO3","LO4", "LO5", "LO5b")
-names(ERCC)<-c("gene_id","B29","B30","B31", "B32","LO2","LO3","LO4", "LO5" )
 
-#Make data frame with just sample FPKM values for ERCC genes and concentration of ERCC genes in spike in mix
-# make sure items in data frame are integers
-
-#LO2 mix 1
-LO2spkindf<-data.frame(ERCC$LO2,ercc_conc$concentration.in.Mix.1..attomoles.ul.)
-names(LO2spkindf)<-c("FPKM", "conc")
-LO2spkindf$FPKM<-as.integer(LO2spkindf$FPKM)
-LO2spkindf$conc<-as.integer(LO2spkindf$conc)
-row_sub = apply(LO2spkindf, 1, function(row) all(row !=0 ))
-LO2spkindf=LO2spkindf[row_sub,]
-LO2spkindf$FPKM<-log2(LO2spkindf$FPKM)
-LO2spkindf$conc<-log2(LO2spkindf$conc)
-
-#LO3 mix 2
-LO3spkindf<-data.frame(ERCC$LO3,ercc_conc$concentration.in.Mix.2..attomoles.ul.)
-names(LO3spkindf)<-c("FPKM", "conc")
-LO3spkindf$FPKM<-as.integer(LO3spkindf$FPKM)
-LO3spkindf$conc<-as.integer(LO3spkindf$conc)
-row_sub = apply(LO3spkindf, 1, function(row) all(row !=0 ))
-LO3spkindf=LO3spkindf[row_sub,]
-LO3spkindf$FPKM<-log2(LO3spkindf$FPKM)
-LO3spkindf$conc<-log2(LO3spkindf$conc)
-
-#LO4 mix 2
-LO4spkindf<-data.frame(ERCC$LO4,ercc_conc$concentration.in.Mix.2..attomoles.ul.)
-names(LO4spkindf)<-c("FPKM", "conc")
-LO4spkindf$FPKM<-as.integer(LO4spkindf$FPKM)
-LO4spkindf$conc<-as.integer(LO4spkindf$conc)
-row_sub = apply(LO4spkindf, 1, function(row) all(row !=0 ))
-LO4spkindf=LO4spkindf[row_sub,]
-LO4spkindf$FPKM<-log2(LO4spkindf$FPKM)
-LO4spkindf$conc<-log2(LO4spkindf$conc)
-
-#LO5 mix 1
-LO5spkindf<-data.frame(ERCC$LO5,ercc_conc$concentration.in.Mix.1..attomoles.ul.)
-names(LO5spkindf)<-c("FPKM", "conc")
-LO5spkindf$FPKM<-as.integer(LO5spkindf$FPKM)
-LO5spkindf$conc<-as.integer(LO5spkindf$conc)
-row_sub = apply(LO5spkindf, 1, function(row) all(row !=0 ))
-LO5spkindf=LO5spkindf[row_sub,]
-LO5spkindf$FPKM<-log2(LO5spkindf$FPKM)
-LO5spkindf$conc<-log2(LO5spkindf$conc)
-
-#b29 mix 1
-B29spkindf<-data.frame(ERCC$B29,ercc_conc$concentration.in.Mix.1..attomoles.ul.)
-names(B29spkindf)<-c("FPKM", "conc")
-B29spkindf$FPKM<-as.integer(B29spkindf$FPKM)
-B29spkindf$conc<-as.integer(B29spkindf$conc)
-row_sub = apply(B29spkindf, 1, function(row) all(row !=0 ))
-B29spkindf=B29spkindf[row_sub,]
-B29spkindf$FPKM<-log2(B29spkindf$FPKM)
-B29spkindf$conc<-log2(B29spkindf$conc)
-
-#b30 mix 2
-B30spkindf<-data.frame(ERCC$B30,ercc_conc$concentration.in.Mix.2..attomoles.ul.)
-names(B30spkindf)<-c("FPKM", "conc")
-B30spkindf$FPKM<-as.integer(B30spkindf$FPKM)
-B30spkindf$conc<-as.integer(B30spkindf$conc)
-row_sub = apply(B30spkindf, 1, function(row) all(row !=0 ))
-B30spkindf=B30spkindf[row_sub,]
-B30spkindf$FPKM<-log2(B30spkindf$FPKM)
-B30spkindf$conc<-log2(B30spkindf$conc)
-
-#b31 mix 2
-B31spkindf<-data.frame(ERCC$B31,ercc_conc$concentration.in.Mix.2..attomoles.ul.)
-names(B31spkindf)<-c("FPKM", "conc")
-B31spkindf$FPKM<-as.integer(B31spkindf$FPKM)
-B31spkindf$conc<-as.integer(B31spkindf$conc)
-row_sub = apply(B31spkindf, 1, function(row) all(row !=0 ))
-B31spkindf=B31spkindf[row_sub,]
-B31spkindf$FPKM<-log2(B31spkindf$FPKM)
-B31spkindf$conc<-log2(B31spkindf$conc)
-
-#b32 mix 1
-B32spkindf<-data.frame(ERCC$B32,ercc_conc$concentration.in.Mix.1..attomoles.ul.)
-names(B32spkindf)<-c("FPKM", "conc")
-B32spkindf$FPKM<-as.integer(B32spkindf$FPKM)
-B32spkindf$conc<-as.integer(B32spkindf$conc)
-row_sub = apply(B32spkindf, 1, function(row) all(row !=0 ))
-B32spkindf=B32spkindf[row_sub,]
-B32spkindf$FPKM<-log2(B32spkindf$FPKM)
-B32spkindf$conc<-log2(B32spkindf$conc)
-
-#function creating text for line equation and r squared value
-#enter name of data frame
-lm_eqn <- function(df){
-  y<-df$FPKM
-  x<-df$conc
-  m <- lm(y ~ x, df);
-  eq <- substitute(italic(y) == a + b %.% italic(x)*","~~italic(r)^2~"="~r2, 
-                   list(a = format(coef(m)[1], digits = 2), 
-                        b = format(coef(m)[2], digits = 2), 
-                        r2 = format(summary(m)$r.squared, digits = 3)))
-  as.character(as.expression(eq));                 
-}
-
-# plot ERCC genes FPKM values v. the concentration of genes from ERCC spikein
-#use Log2 x and y axis
-#add line equation and rsquared to the plot
-## tried to add linear regression line and could not get past the error messages
-library("ggplot2", lib.loc="~/Desktop/R-3.2.2/library")
-#LO2
-spikeinPlotLO2<-ggplot(LO2spkindf, aes(x=conc,y=FPKM)) +geom_point()+ggtitle("LO2/spike-in 1")+ geom_smooth(method=lm, se=FALSE, color="black") +
-  theme(panel.background =element_blank(), panel.grid.major = element_blank(), panel.grid.minor =element_blank(), panel.border =element_blank()) +
-  theme(axis.line = element_line(color = 'black'))+ geom_text(x = 4.5, y = 15, label = lm_eqn(LO2spkindf), parse = TRUE) +
-  labs(x=expression(paste("Log"[2]," concentration", sep=""))) +
-  labs(y=expression(paste("Log"[2]," FPKM", sep="")))
-
-#LO3
-spikeinPlotLO3<-ggplot(LO3spkindf, aes(x=conc,y=FPKM)) +geom_point()+ggtitle("LO3/spike-in 2")+
-  theme(panel.background =element_blank(), panel.grid.major = element_blank(), panel.grid.minor =element_blank(), panel.border =element_blank()) +
-  theme(axis.line = element_line(color = 'black')) +
-  geom_text(x = 4.5, y = 15, label = lm_eqn(LO3spkindf), parse = TRUE) +
-  geom_smooth(method=lm, se=FALSE, color="black") +
-  labs(x=expression(paste("Log"[2]," concentration", sep=""))) +
-  labs(y=expression(paste("Log"[2]," FPKM", sep="")))
-
-# LO4
-spikeinPlotLO4<-ggplot(LO4spkindf, aes(x=conc,y=FPKM)) +geom_point()+ggtitle("LO4/spike-in 2")+
-  theme(panel.background =element_blank(), panel.grid.major = element_blank(), panel.grid.minor =element_blank(), panel.border =element_blank()) +
-  theme(axis.line = element_line(color = 'black')) +
-  geom_text(x = 4.5, y = 15, label = lm_eqn(LO4spkindf), parse = TRUE) +
-  geom_smooth(method=lm, se=FALSE, color="black") +
-  labs(x=expression(paste("Log"[2]," concentration", sep=""))) +
-  labs(y=expression(paste("Log"[2]," FPKM", sep="")))
-
-#LO5
-spikeinPlotLO5<-ggplot(LO5spkindf, aes(x=conc,y=FPKM)) +geom_point()+ggtitle("LO5/spike-in 1")+
-  theme(panel.background =element_blank(), panel.grid.major = element_blank(), panel.grid.minor =element_blank(), panel.border =element_blank()) +
-  theme(axis.line = element_line(color = 'black')) +
-  geom_text(x = 4.5, y = 15, label = lm_eqn(LO5spkindf), parse = TRUE) +
-  geom_smooth(method=lm, se=FALSE, color="black") +
-  labs(x=expression(paste("Log"[2]," concentration", sep=""))) +
-  labs(y=expression(paste("Log"[2]," FPKM", sep="")))
-
-#B29
-spikeinPlotB29<-ggplot(B29spkindf, aes(x=conc,y=FPKM)) +geom_point()+ggtitle("B29/spike-in 1")+
-  theme(panel.background =element_blank(), panel.grid.major = element_blank(), panel.grid.minor =element_blank(), panel.border =element_blank()) +
-  theme(axis.line = element_line(color = 'black')) +
-  geom_text(x = 5, y = 11, label = lm_eqn(B29spkindf), parse = TRUE)+
-  geom_smooth(method=lm, se=FALSE, color="black") +
-  labs(x=expression(paste("Log"[2]," concentration", sep=""))) +
-  labs(y=expression(paste("Log"[2]," FPKM", sep="")))
-
-#B30
-spikeinPlotB30<-ggplot(B30spkindf, aes(x=conc,y=FPKM)) +geom_point()+ggtitle("B30/spike-in 2")+
-  theme(panel.background =element_blank(), panel.grid.major = element_blank(), panel.grid.minor =element_blank(), panel.border =element_blank()) +
-  theme(axis.line = element_line(color = 'black')) +
-  geom_text(x = 5, y = 11, label = lm_eqn(B30spkindf), parse = TRUE)+
-  geom_smooth(method=lm, se=FALSE, color="black") +
-  labs(x=expression(paste("Log"[2]," concentration", sep=""))) +
-  labs(y=expression(paste("Log"[2]," FPKM", sep="")))
-
-#B31
-spikeinPlotB31<-ggplot(B31spkindf, aes(x=conc,y=FPKM)) +geom_point()+ggtitle("B31/spike-in 2")+
-  theme(panel.background =element_blank(), panel.grid.major = element_blank(), panel.grid.minor =element_blank(), panel.border =element_blank()) +
-  theme(axis.line = element_line(color = 'black')) +
-  geom_text(x = 5, y = 11, label = lm_eqn(B31spkindf), parse = TRUE)+
-  geom_smooth(method=lm, se=FALSE, color="black") +
-  labs(x=expression(paste("Log"[2]," concentration", sep=""))) +
-  labs(y=expression(paste("Log"[2]," FPKM", sep="")))
-
-#B32
-spikeinPlotB32<-ggplot(B32spkindf, aes(x=conc,y=FPKM)) +geom_point()+ggtitle("B32/spike-in 1")+
-  theme(panel.background =element_blank(), panel.grid.major = element_blank(), panel.grid.minor =element_blank(), panel.border =element_blank()) +
-  theme(axis.line = element_line(color = 'black')) +
-  geom_text(x = 5, y = 11, label = lm_eqn(B32spkindf), parse = TRUE)+
-  geom_smooth(method=lm, se=FALSE, color="black") +
-  labs(x=expression(paste("Log"[2]," concentration", sep=""))) +
-  labs(y=expression(paste("Log"[2]," FPKM", sep="")))
-
-# put together concentration v. FPKM plots
-library("gridExtra", lib.loc="~/Desktop/R-3.2.2/library")
-grid.arrange(spikeinPlotLO2, spikeinPlotLO3, spikeinPlotLO4, spikeinPlotLO5, ncol=2, nrow=2)
-grid.arrange(spikeinPlotB29, spikeinPlotB30, spikeinPlotB31, spikeinPlotB32, ncol=2, nrow=2)
-
-
-
-#remove ERCC genes from dataframe Genes
-Genes<-Genes[93:4061,]
-
-View (Genes)
-
-## in case you want to write data frames to csv to use in other programs
-write.csv(Genes, file="/Users/brisbin/desktop/Siphamia/siph.genes.results/Genes.csv")
-write.csv(FPKM, file="/Users/brisbin/desktop/Siphamia/siph.genes.results/FPKM.csv")
+#remove ERCC lines from Genes dataframe
+Genes<-Genes[93:4061, ]
+Genes<-data.frame(Genes$gene_id,Genes$B29, Genes$B30, Genes$B31, Genes$B32, Genes$LO2, Genes$LO3, Genes$LO4, Genes$LO5, Genes$LO5b)
+names(Genes)<-c("gene_id","B29","B30","B31", "B32","LO2","LO3","LO4", "LO5", "LO5b")
 
 #Load edgeR
 library("edgeR", lib.loc="~/Desktop/R-3.2.2/library")
@@ -265,8 +79,6 @@ abline(h=0, col="red", lty=2, lwd=2)
 #check should be repeated by constructing a MD plot for each sample.
 
 
-
-
 #Multi-Dimensional Scaling Plot
 #measures similarity of samples and projects measure into 2 dimensions
 plotMDS( cds , main = "MDS Plot for Bacteria Count Data", labels = colnames( cds$counts ) )
@@ -280,6 +92,28 @@ names( cds )
 #The estimate
 cds$common.dispersion
 
+
+# ##from edger docs
+# trt <- factor(c(1,1,1,1,2,2,2,2))
+# design <- model.matrix(~trt)
+# design <- model.matrix(~group)
+# design
+# ## only LO, where is B?????
+# # there should be another column - B, with 0s and 1's in the opposite positions??
+# 
+# library("statmod", lib.loc="~/Desktop/R-3.2.2/library")
+# cds<- estimateDisp(cds, design, robust=TRUE)
+# cds$common.dispersion
+# plotBCV(cds)
+# fit <- glmQLFit(cds, design, robust=TRUE)
+# head(fit$coefficients)
+# plotQLDisp(fit)
+# #differential expression
+# qlf <- glmQLFTest(fit)
+# topTags(qlf,n=15)
+# #The total number of DE exons in each direction at a FDR of 5% can be examined with
+# #decideTestsDGE.
+# summary(decideTestsDGE(qlf, p.value=0.05))
 
 #with common dispersion, can estimate tagwise dispersions
 #each gene will get its own dispersion estimate
@@ -365,6 +199,9 @@ length( de.genes.poi ) / nrow( resultsTbl.poi ) * 100
 # Up/Down regulated summary for tagwise results
 summary( decideTestsDGE( de.tgw , p.value = 0.05 ) ) # the adjusted p-values are used here
 
+# -1 1405
+# 0  1181
+# 1  1255
 
 
 #Visualize results
@@ -405,3 +242,52 @@ plotSmear( cds , de.tags=de.genes.tgw[1:500] , main="Bacteria Tagwise MA plot" ,
            xlab="Log Concentration" , ylab="Log Fold-Change" )
 abline( h=c(-2,2) , col="dodgerblue" )
 par( mfrow=c(1,1) )
+
+#Output results
+#make a table or csv file containing results with concentrations, fold-changes, p-values
+#up/down regulated variable, dispersions, and the count matrix
+
+# Change column names to be specific to the analysis, logConc and logFC are the same in both.
+colnames( resultsTbl.cmn ) <- c( "logConc" , "logFC" , "pVal.Cmn" , "adj.pVal.Cmn" )
+colnames( resultsTbl.tgw ) <- c( "logConc" , "logFC" , "pVal.Tgw" , "adj.pVal.Tgw" )
+# Below provides the info to re-order the count matrix to be in line with the order of the results.
+wh.rows.tgw <- match( rownames( resultsTbl.tgw ) , rownames( cds$counts ) )
+wh.rows.cmn <- match( rownames( resultsTbl.cmn ) , rownames( cds$counts ) )
+head( wh.rows.tgw )
+# Tagwise Results
+combResults.tgw <- cbind( resultsTbl.tgw ,
+                          "Tgw.Disp" = cds$tagwise.dispersion[ wh.rows.tgw ] ,
+                          "UpDown.Tgw" = decideTestsDGE( de.tgw , p.value = 0.05 )[ wh.rows.tgw ] ,
+                          cds$counts[ wh.rows.tgw , ] )
+head( combResults.tgw )
+# Common Results
+combResults.cmn <- cbind( resultsTbl.cmn ,
+                          "Cmn.Disp" = cds$common.dispersion ,
+                          "UpDown.Cmn" = decideTestsDGE( de.cmn , p.value = 0.05 )[ wh.rows.cmn ] ,
+                          cds$counts[ wh.rows.cmn , ] )
+head( combResults.cmn )
+
+#combine both common and tagwise results together
+
+wh.rows <- match( rownames( combResults.cmn ) , rownames( combResults.tgw ) )
+combResults.all <- cbind( combResults.cmn[,1:4] ,
+                          combResults.tgw[wh.rows,3:4] ,
+                          "Cmn.Disp" = combResults.cmn[,5],
+                          "Tgw.Disp" = combResults.tgw[wh.rows,5],
+                          "UpDown.Cmn" = combResults.cmn[,6],
+                          "UpDown.Tgw" = combResults.tgw[wh.rows,6],
+                          combResults.cmn[,7:ncol(combResults.cmn)] )
+head( combResults.all )
+# Ouput csv tables of results
+write.table( combResults.tgw , file = "combResults_tgw_ex1.csv" , sep = "," , row.names = TRUE )
+write.table( combResults.cmn , file = "combResults_cmn_ex1.csv" , sep = "," , row.names = TRUE )
+write.table( combResults.all , file = "combResults_all_ex1.csv" , sep = "," , row.names = TRUE )
+
+#par( mfrow=c(3 ,1) )
+#hist( resultsTbl.poi[de.genes.poi[1:100],"logConc"] , breaks=10 , xlab="Log Concentration" ,
+#      col="red" , xlim=c(-18,-6) , ylim=c(0,0.4) , freq=FALSE , main="Poisson: Top 100" )
+#hist( resultsTbl.cmn[de.genes.cmn[1:100],"logConc"] , breaks=25 , xlab="Log Concentration" ,
+#      col="green" , xlim=c(-18,-6) , ylim=c(0,0.4) , freq=FALSE , main="Common: Top 100" )
+#hist( resultsTbl.tgw[de.genes.tgw[1:100],"logConc"] , breaks=25 , xlab="Log Concentration" ,
+#      col="blue" , xlim=c(-18,-6) , ylim=c(0,0.4) , freq=FALSE , main="Tagwise: Top 100" )
+#par( mfrow=c(1,1) )
