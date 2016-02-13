@@ -9,10 +9,10 @@ RNA-seq Differential Expression project with _Siphamia tubifer_ and _Photobacter
 4. Calculate differential expression with RSEM (``bactRSEM.slurm``, ``loRSEM.slurm``)
 5. Check ERCC results `bact.ERCC.R`
 5. Analyse differential expression with edgeR (``bacteria.genes.R``)
-  *Results are `combResults_tgw_ex1.csv`
+  * Results are `combResults_tgw_ex1.csv`
 6. GO enrichment
-  *gene ID to GO term reference is `geneGOref.csv`
-  *preparing `geneGOref.csv` for GOstats: `GoTermsR.R`
+  * gene ID to GO term reference is `geneGOref.csv`
+  * preparing `geneGOref.csv` for GOstats: `GoTermsR.R`
 
 ## Fish
 2. Trim barcodes from fish muscle sequences with Flexbar (``flexM.slurm``)
