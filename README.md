@@ -11,7 +11,7 @@ RNA-seq Differential Expression project with _Siphamia tubifer_ and _Photobacter
 5. Analyse differential expression with edgeR (``bacteria.genes.R``)
   * Results are `combResults_tgw_ex1.csv`
 6. GO enrichment
-  * gene ID to GO term reference is `geneGOref.csv`
+  * gene ID to GO term reference is `geneGOref.csv`, created with `BactXML.ipynb` (utilizing `geneidref.txt`, `geneids.txt`, and `genenume.txt`)
   * preparing `geneGOref.csv` for GOstats: `GoTermsR.R`
 
 ## Fish
@@ -30,3 +30,4 @@ RNA-seq Differential Expression project with _Siphamia tubifer_ and _Photobacter
 10. Analyse differential expression with edgeR
 11. Filter Trinity.fasta file to remove genes with less than 1 FPKM averaged across samples and keep only the longest isoform for each gene with Biopython (``lowFPKM_filter.ipynb``, ``isoform_filter.ipynb``)
 12. GO enrichment
+  * created `FishNotFish.csv` with `multiblastXML.ipynb`
